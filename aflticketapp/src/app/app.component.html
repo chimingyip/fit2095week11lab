@@ -1,0 +1,41 @@
+<body>
+<div class="app-container">
+  <div class="left">
+    <div *ngIf="isSenderAlertDisplayed === true" class="alert alert-success" role="alert">
+      {{senderAlert}}
+    </div>
+    <div *ngIf="isOthersAlertDisplayed === true" class="alert alert-info" role="alert">
+      {{othersAlert}}
+    </div>
+    <form method="post">
+      <div class="ticket-selection">
+        <p *ngIf="teamsObj"><strong>{{teamsObj.theText}}</strong></p>
+        <input type="number" class="ticket-quantity" [(ngModel)]="count">
+      </div>
+      <hr/>
+      <label for="team">Choose a team:</label>
+      <select  *ngIf="teamsObj" [(ngModel)]="name" class="form-control" name="team" id="team">
+        <option disabled selected value>-- Select a Team --</option>
+        <option *ngFor="let team of teamsObj.teams">{{team.name}}</option>
+      </select>
+      <br>
+      <button (click)="purchaseTickets()" type="submit" class="btn btn-primary">Purchase</button>
+      <br><br>
+      <p>Total tickets sold: {{total}}</p>
+    </form>
+  </div>
+
+  <div class="right">
+    <canvas baseChart 
+      [data]="pieChartData" 
+      [labels]="pieChartLabels" 
+      [chartType]="pieChartType"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [colors]="pieChartColors"
+      [legend]="pieChartLegend">
+    </canvas>
+  </div>
+</div>
+</body>
+
